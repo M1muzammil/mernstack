@@ -65,14 +65,10 @@ app.use("/api/v1", postRouter) // Secure api
 app.use("/api/v1/ping", (req, res) => {
     res.send("OK");
 })
-// app.use(express.static(path.join(__dirname, 'web/build')))
-// app.get(express.static(path.join(__dirname, 'web/build')))
-// app.use("*", express.static(path.join(__dirname, 'web/build')))
-app.use('/', express.static(path.join(__dirname, 'web/build')))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/web/build/index.html'))
-    // res.redirect('/');
-})
+app.use(express.static(path.join(__dirname, 'web/build')))
+app.get(express.static(path.join(__dirname, 'web/build')))
+app.use("*", express.static(path.join(__dirname, 'web/build')))
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
