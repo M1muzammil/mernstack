@@ -213,8 +213,8 @@ router.get('/posts/:userId', async (req, res, next) => {
       const cursor = col.find({ authorId: new ObjectId(userId) }).sort({ _id: -1 });
       const results = await cursor.toArray();
   
-      console.log(results);
-      res.send(results);
+      console.log("=====>", results);
+      res.send({results:results, userId:userId});
     } catch (error) {
       console.error(error); 
       res.status(500).send('Server error');

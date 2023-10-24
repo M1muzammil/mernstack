@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { BsPerson , BsPersonCircle} from 'react-icons/bs'
+import { BsPerson, BsPersonCircle } from 'react-icons/bs'
 
 import { GlobalContext } from '../../context/context';
 import './about.css';
 
 const About = () => {
   const { userId } = useParams();
+
   const { state, dispatch } = useContext(GlobalContext);
 
   const [userPosts, setUserPosts] = useState([]);
   const [profile, setProfile] = useState([]);
- 
+
   const [allPosts, setAllPosts] = useState(userPosts);
 
 
@@ -20,66 +21,61 @@ const About = () => {
   const [alert, setAlert] = useState(null);
 
 
- 
+
   const [toggleRefresh, setToggleRefresh] = useState(false);
-  
+
 
   useEffect(() => {
-     renderCurrentUserPost();
-    getProfile()
-    console.log(userId);
+    renderCurrentUserPost(userId);
+    getProfile(userId)
+    console.log("userid",userId);
+
     return () => {
       // cleanup function
     };
 
   }, [userId]);;
 
+  console.log(userId);
 
-const renderCurrentUserPost = () => {
-  console.log("click")
-  axios.get(`/api/v1/posts/${userId|| ""}`)
-
-
-
-  .then((response) => {
-    const userAllPosts = response.data;
-    console.log("ok"); 
-    console.log(userAllPosts); // Log the response data to the console
-    setUserPosts(userAllPosts);
-    console.log("user", userId
-    )
-  })
-  .catch((error) => {
-    console.error('Axios error:', error);
-    console.log("error details:", error.response);
-    console.log("error", error)
-  });
-};
-
-const getProfile = async () => {
+  const renderCurrentUserPost = (userId) => {
+    axios.get(`/api/v1/posts/${userId}`)
+      .then((response) => {
+        const userAllPosts = response.data;
+        console.log(response.data);
+        setUserPosts(userAllPosts); // Set user posts to the state
+      })
+      .catch((error) => {
+        console.error('Axios error:', error);
+      });
+  };
+  
+  const getProfile = async (userId) => {
     try {
-      const response = await axios.get(`/api/v1/profile/${userId }`);
-      setProfile(response.data.data);
+      const response = await axios.get(`/api/v1/profile/${userId}`);
+      setProfile(response.data.data); // Set the profile to the state
     } catch (error) {
       console.log(error.data);
-      setProfile("noUser")
+      setProfile("noUser");
     }
-  }
+  };
+  
+
 
   const deletePostHandler = async (_id) => {
     try {
       setIsLoading(true);
       const response = await axios.delete(`/api/v1/post/${_id}`);
-  
+
       setIsLoading(false);
       console.log(response.data);
       setAlert(response.data.message);
       setToggleRefresh(!toggleRefresh);
-  
+
       // Filter out the deleted post from the local state (userPosts)
       const updatedUserPosts = userPosts.filter((post) => post._id !== _id);
       setUserPosts(updatedUserPosts);
-  
+
       // Additionally, you should also update allPosts if needed
       const updatedAllPosts = allPosts.filter((post) => post._id !== _id);
       setAllPosts(updatedAllPosts);
@@ -88,11 +84,11 @@ const getProfile = async () => {
       setIsLoading(false);
     }
   };
-  
-  
- 
 
- 
+
+
+
+
 
 
 
@@ -126,11 +122,9 @@ const getProfile = async () => {
     }
   };
 
-
-
   const logout = async (event) => {
     event.preventDefault();
-  
+
     try {
       const response = await axios.post(`/api/v1/logout`, {});
       if (response.data.success) {
@@ -145,7 +139,7 @@ const getProfile = async () => {
       console.error("Error during logout:", error);
     }
   };
-  
+
 
 
 
@@ -161,46 +155,41 @@ const getProfile = async () => {
 
   return (
 
-  
     <div>
+      <div
+        className='profileName'>
+        <p id="ppp"><BsPersonCircle /></p>
+        <h5>{profile ? `${profile.firstName} ${profile.lastName}` : 'Loading...'}</h5>
+      </div>
+      <button className="logout" onClick={logout}>logout</button>
+      <h2>your Posts</h2>
 
-<div
-className='profileName'>
-  <p id="ppp"><BsPersonCircle/></p>
-  <h5>{profile ? `${profile.firstName} ${profile.lastName}` : 'Loading...'}</h5>
-</div>
-<button className="logout" onClick={logout}>logout</button>
 
 
 
-  <h2>your Posts</h2>
- 
+      <div>
 
- 
 
- <div>
-        
 
-    
 
       </div>
 
       <div>
-      {userPosts.map((post, index) => (
-  <div key={post._id} className="post">
-    {post.isEdit ? (
-              <form  onSubmit={editSaveSubmitHandler} className="postbanerr">
+        {userPosts.map((post, index) => (
+          <div key={post._id} className="post">
+            {post.isEdit ? (
+              <form onSubmit={editSaveSubmitHandler} className="postbanerr">
                 <input type="text" disabled value={post._id} hidden />
                 <input defaultValue={post.title} type="text" placeholder="title" />
                 <br />
                 <textarea defaultValue={post.text} type="text" placeholder="body" />
                 <br />
                 <button
-                
-                
-                id='blue' type="submit">Save</button>
+
+
+                  id='blue' type="submit">Save</button>
                 <button
-                id='blue'
+                  id='blue'
                   type="button"
                   onClick={() => {
                     post.isEdit = false;
@@ -210,43 +199,43 @@ className='profileName'>
                   Cancel
                 </button>
               </form>
-    ) : (
-      <div>
-        <div className='postbaner'>
-          <h2>{post.title}</h2>
-          <p>{post.text}</p>
-          <div className="userbutton">
-            <button
-              onClick={(e) => {
-                console.log("click");
-                // Check if 'post' is defined before updating isEdit
-                if (post) {
-                  post.isEdit = true;
-                  setAllPosts([...userPosts]);
-                }
-              }}
-            >
-              Edit
-            </button>
-            <button
-              onClick={(e) => {
-                deletePostHandler(post._id);
-              }}
-            >
-              Delete
-            </button>
+            ) : (
+              <div>
+                <div className='postbaner'>
+                  <h2>{post.title}</h2>
+                  <p>{post.text}</p>
+                  <div className="userbutton">
+                    <button
+                      onClick={(e) => {
+                        console.log("click");
+                        // Check if 'post' is defined before updating isEdit
+                        if (post) {
+                          post.isEdit = true;
+                          setAllPosts([...userPosts]);
+                        }
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        deletePostHandler(post._id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      </div>
-    )}
-  </div>
-))}
+        ))}
 
 
         <br />
       </div>
 
-</div>
+    </div>
 
   );
 };
