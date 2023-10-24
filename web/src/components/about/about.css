@@ -1,0 +1,41 @@
+.mainauthor
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+    
+}
+#ppp{
+    font-size: 4em;
+   
+}
+
+.userbutton{
+    display: flex;
+    width: 100;
+    justify-content: space-between;
+    border-top: 0.01em solid rgb(92, 135, 89);
+
+}
+.userbutton>button{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.mainauthor>.author{
+    box-shadow: 0 0 10px rgb(92, 135, 89);  box-shadow: 0 0 10px rgb(92, 135, 89); 
+    max-width: 350px;
+    min-width: 350px;
+    margin: 2em;
+    background-color: rgb(103, 156, 148);
+     padding-left: 1em;
+     padding-top: 1em;
+     padding-right: 1em; 
+     padding-bottom: 0.3em;
+}
+

@@ -1,0 +1,181 @@
+body{
+    margin: 1em;
+}
+
+.div{
+    background-color: rgb(199, 218, 220);
+}
+
+.searchdiv{
+    display:flex ;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.searchdiv>form{
+   width: 100%;
+   
+}
+#blue{
+    background-color: blue;
+    color: white;
+}
+.searchdiv>img{
+    border-radius: 50%;
+    border: 1px solid  gray;
+    margin-right: 1em;
+}
+.searchdiv>input{
+    width: 80%;
+}
+.searchdiv>span>a{
+    font-size: 2em;
+    margin-left: 1rem;
+    text-decoration: none;
+    color:green;
+
+    /* width: 20%; */
+}
+.searchdiv>span{
+    width: 20%;
+}
+.searchdiv>input{
+    padding: 1em;
+    border-radius: 20px;
+    color: black;
+}
+
+.posttext{
+    display: flex;
+justify-content: center;
+align-items: center;
+    flex-direction: column;
+}
+
+.box{
+    box-shadow: 0 0 10px rgb(92, 135, 89); 
+  /* width: 20%; */
+  left: 50%;
+  right: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1em;
+}
+.box>input{
+    border: 2px solid green;
+    border-radius: 05px;
+    padding: 1em;
+    color: black;
+   
+}
+.box>button{
+    color: white;
+    background-color: rgb(163, 201, 163);
+    box-shadow: 0 0 10px rgb(92, 135, 89); 
+}
+.postbaner{
+    box-shadow: 0 0 10px rgb(92, 135, 89);  box-shadow: 0 0 10px rgb(160, 210, 204); 
+   max-width: 350px;
+   margin: 2em;
+  background-color: #93b5b5;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-right: 1em; 
+    padding-bottom: 0.3em;
+}
+
+.postbaner:hover{
+    width: 400px;
+    box-shadow: 0 0 10px rgb(6, 18, 5);  box-shadow: 0 0 10px rgb(92, 135, 89);  
+}
+.postbanerr>button{
+    background-color: rgb(255, 255, 255);
+    outline: none;
+    border: none;
+    padding: 0.4em;
+    margin: 0.3em;
+    width: 47%;
+    padding-bottom: 0;
+}
+.postbaner>p{
+overflow-wrap: break-word;
+}
+.postbaner>button{
+    background-color: rgb(235, 220, 201);
+    outline: none;
+    border: none;
+    padding: 0.4em;
+    margin: 0.3em;
+    width: 47%;
+    padding-bottom: 0;
+}
+.postbaner>button:hover
+{
+    color: white;
+    background-color: green;
+}
+.postbanerr{
+    max-width: 400px;
+    margin-left: 2em;
+}
+.postbanerr>textarea{
+    height: 100%;
+}
+
+  .postbaner>h2{
+    color: rgb(23, 83, 23);
+    font-size: 2rem;
+  }  
+  .postbaner>p{
+    font-size: 1rem;
+  }
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media screen and (max-width: 768px)  {
+    .searchdiv>span>a{
+        font-size: 2.5em;
+        margin-right: 0.4rem;
+        border-radius: 50%;
+
+       
+    }
+    .searchdiv>span>#hide{
+        display: none;
+    }
+    .searchdiv>img{
+        border-radius: 50%;
+        border: 1px solid  gray;
+        margin-right: 0.3em;
+    }
+  
+}
+.postbutton{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.postbutton>#delete
+{
+    background-color: red;
+}
+
+.postbanerbuttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.1em solid rgb(110, 165, 152);
+    
+}
+.postbanerbuttons>button{
+    background-color: transparent;
+
+}

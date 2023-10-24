@@ -1,0 +1,29 @@
+/* SuggestionBox.css (or your preferred CSS file) */
+.suggestion{
+   
+  
+    border:none;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-height: 150px; /* Set the maximum height to control the box size */
+    /* Enable scrolling if the suggestions overflow */
+    /* Ensure the box appears above other elements */
+    width: 60%; /* Match the width of the input field */
+    
+  }
+  
+  .suggestion {
+    padding: 10px;
+    cursor: pointer;
+    padding: 0.8em;
+   
+  }
+  
+  .suggestion-item:hover {
+    background-color: #989298;
+    padding: 0.8em;
+    border-radius: 20px;
+  }
+  
+  /* Additional styles can be added to improve appearance */
+  

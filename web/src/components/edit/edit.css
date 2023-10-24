@@ -1,0 +1,23 @@
+.edit{
+    background-color: rgb(199, 218, 220);
+    height:  100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+    padding: 1em;
+    width: 100%;
+
+}
+
+
+.edit > #edit > input{
+    width: 90%;
+    background-color: rgb(147, 181, 181);
+margin: 2em;
+    
+    
+}
+#heading{
+    color: rgb(107, 146, 146); ;
+    
+}
