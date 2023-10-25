@@ -96,7 +96,7 @@ color: rgb(21, 162, 218);
         border-radius: 1em;
         font-size: 1em;
     }
-    .navbar>.navright{
+    .navbar>.navright>a{
         display: none;
     }
   }

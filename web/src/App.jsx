@@ -84,7 +84,7 @@ const App = () => {
 
       {state.isLogin === false ? (
         <>
-          <div>{JSON.stringify(state)}</div>
+          {/* <div>{JSON.stringify(state)}</div> */}
           <Routes>
             <Route path="/" element={<Lander />} />
             <Route path="/Login" element={<Login />} />

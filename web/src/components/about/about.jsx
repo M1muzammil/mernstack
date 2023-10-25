@@ -43,7 +43,7 @@ const About = () => {
       .then((response) => {
         const userAllPosts = response.data;
         console.log(response.data);
-        setUserPosts(userAllPosts); // Set user posts to the state
+        setUserPosts(userAllPosts) // Set user posts to the state
       })
       .catch((error) => {
         console.error('Axios error:', error);
@@ -131,7 +131,7 @@ const About = () => {
         dispatch({
           type: 'USER_LOGOUT',
         });
-        window.location.pathname = '/login';
+        window.location.pathname= './login'
       } else {
         console.error("Logout failed");
       }

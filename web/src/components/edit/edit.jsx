@@ -69,9 +69,24 @@ const Edit = () => {
   ref={postBodyInputRef}
   required />
 <br />
+<input type="up" />
+
 <button>submit</button>
 </form>
+
+
+
+
+
         </div>
+
+
+
+
+
+
+
+
     );
 }
 export default Edit;

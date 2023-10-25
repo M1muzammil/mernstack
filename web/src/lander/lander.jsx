@@ -26,7 +26,7 @@ const Lander = () => {
                         From Hobbyist to Pro Blogger Has You Covered
                     </h3>
                     <div className="button">
-                        <button>Get Started</button>
+                        <button onClick={Changehadler}>Get Started</button>
                     </div>
                 </div>
                 <div className="rightslider">

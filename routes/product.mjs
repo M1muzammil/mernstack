@@ -102,7 +102,8 @@ router.post('/post', async (req, res, next) => {
             text: req.body.text,
             authorEmail: req.body.decoded.email,
             authorId: new ObjectId(req.body.decoded._id),
-            createdOn: new Date()
+            // createdOn: new Date(),
+            time: new Date()
         });
         console.log("insertResponse: ", insertResponse);
 
@@ -132,24 +133,30 @@ router.get('/feed', async (req, res, next) => {
 })
 
 
-router.get('/posts', async (req, res, next) => {
 
-    const cursor = col.find({})
-        .sort({ _id: -1 })
-        .limit(100);
+
+
+router.get('/posts', async (req, res, next) => {
+    const cursor = col.find({}).sort({ _id: -1 }).limit(100);
 
     try {
-        let results = await cursor.toArray()
-        console.log("results: ", results);
+        const results = await cursor.toArray();
+        
+        // Fetch user information for each post and add it to the results
+        for (const post of results) {
+            const user = await userCollection.findOne({ _id: post.authorId });
+            if (user) {
+                post.user = user; // Include the entire user object
+        console.log("User's name:", user.name);
+            }
+        }
+
         res.send(results);
     } catch (e) {
-        console.log("error getting data mongodb: ", e);
-        res.status(500).send('server error, please try later');
+        console.log("error getting data from MongoDB: ", e);
+        res.status(500).send('Server error, please try later');
     }
-})
-
-
-// [92133,92254, 92255 ]
+});
 
 router.get('/posts/:userId', async (req, res, next) => {
     const userId = req.params.userId;
@@ -433,6 +440,29 @@ router.post("/logout", async (req, res, next) => {
 });
 
 
+router.post('/post/:postId/dolike', async (req, res, next) => {
+
+    if (!ObjectId.isValid(req.params.postId)) {
+        res.status(403).send(`Invalid post id`);
+        return;
+    }
+
+    try {
+        const doLikeResponse = await col.updateOne(
+            { _id: new ObjectId(req.params.postId) },
+            {
+                $addToSet: {
+                    likes: new ObjectId(req.body.decoded._id)
+                }
+            }
+        );
+        console.log("doLikeResponse: ", doLikeResponse);
+        res.send('like done');
+    } catch (e) {
+        console.log("error like post mongodb: ", e);
+        res.status(500).send('server error, please try later');
+    }
+})
 
 
 
