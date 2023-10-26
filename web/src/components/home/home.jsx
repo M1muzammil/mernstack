@@ -3,7 +3,8 @@ import axios from "axios";
 import SuggestionBox from "../../suggest/suggestion";
 import muzammil from "./muzammil.jpg";
 import "./home.css";
-import { BsHandThumbsUp,BsShare,BsChatLeftDots, BsPersonCircle ,BsPerson, BsGithub, BsFacebook, BsLinkedin, BsPersonFill } from 'react-icons/bs'
+import { BsHandThumbsUp,BsShare,BsChatLeftDots, BsPersonCircle ,BsPerson, BsGithub, BsFacebook, BsLinkedin, BsPersonFill }from 'react-icons/bs'
+
 const Home = () => {
   const searchInputRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -119,13 +120,19 @@ const Home = () => {
           <div key={post._id} className="post">
             <div className="postbaner">
 <div className="profilemain">
-  <h1><BsPersonCircle/>{post.username}</h1>
+  <h1><BsPersonCircle/><p>{`${post.firstName} ${post.lastName}`}</p></h1>
   <p>{formatTimeDifference(post.time)}</p>
   
 </div>
 
               <h2>{post.title}</h2>
               <p>{post.text}</p>
+              {post.img &&
+                  <>
+                    <img width={300} src={post.img} alt="post image" />
+                    <br />
+                  </>
+                }
               <div className="postbanerbuttons">
               
 <button 
