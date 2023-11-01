@@ -21,6 +21,29 @@ body{
     background-color: blue;
     color: white;
 }
+
+.profilemain{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+.profilemain>p{
+    margin: 0;
+    padding: 0;
+   
+}
+
+.profilemain>span{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.profilemain>span>p{
+    margin-top: 1em;
+    margin-left: 0.2em;
+}
 .searchdiv>img{
     border-radius: 50%;
     border: 1px solid  gray;

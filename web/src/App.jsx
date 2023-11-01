@@ -56,14 +56,15 @@ const App = () => {
           <Link to="/">
             <BsHouseFill />
           </Link>
-          <Link to="/Chat">
-            <BsChat />
-          </Link>
+          
           <Link to={`/posts/${state.user.userId}`}>
             <BsPersonLinesFill />
           </Link>
           <Link to="/Edit">
             <BsPencilSquare />
+          </Link>
+          <Link to="/Chat">
+            <BsChat />
           </Link>
         </nav>
       ) : null}

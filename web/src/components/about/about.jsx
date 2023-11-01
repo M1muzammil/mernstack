@@ -39,17 +39,17 @@ const About = () => {
   console.log(userId);
 
   const renderCurrentUserPost = (userId) => {
-    axios.get(`/api/v1/posts/${userId}`)
+    axios.get(`/api/v1/posts`)
       .then((response) => {
         const userAllPosts = response.data;
-        console.log(response.data);
-        setUserPosts(userAllPosts) // Set user posts to the state
+        setUserPosts(userAllPosts);
       })
       .catch((error) => {
         console.error('Axios error:', error);
       });
   };
   
+ 
   const getProfile = async (userId) => {
     try {
       const response = await axios.get(`/api/v1/profile/${userId}`);
@@ -157,6 +157,7 @@ const About = () => {
 
     <div>
       <div
+      
         className='profileName'>
         <p id="ppp"><BsPersonCircle /></p>
         <h5>{profile ? `${profile.firstName} ${profile.lastName}` : 'Loading...'}</h5>
@@ -204,6 +205,12 @@ const About = () => {
                 <div className='postbaner'>
                   <h2>{post.title}</h2>
                   <p>{post.text}</p>
+                  {post.img &&
+                  <>
+                    <img width={300} src={post.img} alt="post image" />
+                    <br />
+                  </>
+                }
                   <div className="userbutton">
                     <button
                       onClick={(e) => {

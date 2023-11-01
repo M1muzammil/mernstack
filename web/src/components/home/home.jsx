@@ -13,7 +13,7 @@ const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [toggleRefresh, setToggleRefresh] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  // const [showSuggestions, setShowSuggestions] = useState(false);
   function formatTimeDifference(timestamp) {
     const currentTime = new Date();
     const postTime = new Date(timestamp);
@@ -60,17 +60,17 @@ const Home = () => {
       const response = await axios.get(`/api/v1/search?q=${searchInputRef.current.value}`);
       setIsLoading(false);
       setAllPosts([...response.data]);
-      setSuggestions(response.data.map((post) => post.title));
-      setShowSuggestions(true);
+      // setSuggestions(response.data.map((post) => post.title));
+     
     } catch (error) {
       console.log(error.data);
       setIsLoading(false);
     }
   };
 
-  const handleMouseEnter = () => {
-    setShowSuggestions(true);
-  };
+  // const handleMouseEnter = () => {
+  //   setShowSuggestions(true);
+  // };
   const doLikeHandler = async (_id) => {
     try {
       setIsLoading(true);
@@ -94,8 +94,8 @@ const Home = () => {
           type="search"
           placeholder="search blog here"
           ref={searchInputRef}
-          onBlur={() => setShowSuggestions(false)}
-          onMouseEnter={handleMouseEnter}
+          // onBlur={() => setShowSuggestions(false)}
+        
         />
         <span>
           <a id="hide" href="https://github.com/M1muzammil">
@@ -109,9 +109,9 @@ const Home = () => {
           </a>
         </span>
       </form>
-      <span className="search">
+      {/* <span className="search">
         {showSuggestions && <SuggestionBox suggestions={suggestions} />}
-      </span>
+      </span> */}
       <div>
         <h1>All Blogs</h1>
       </div>
@@ -120,12 +120,13 @@ const Home = () => {
           <div key={post._id} className="post">
             <div className="postbaner">
 <div className="profilemain">
-  <h1><BsPersonCircle/><p>{`${post.firstName} ${post.lastName}`}</p></h1>
+ <span><h1><BsPersonCircle/>
+  </h1><p>{`${post.firstName} ${post.lastName}`}</p></span> 
   <p>{formatTimeDifference(post.time)}</p>
   
 </div>
 
-              <h2>{post.title}</h2>
+               <h2>{post.title}</h2> 
               <p>{post.text}</p>
               {post.img &&
                   <>

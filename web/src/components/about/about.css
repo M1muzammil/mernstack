@@ -13,6 +13,10 @@
    
 }
 
+.profileName{
+    margin: 1em;
+}
+
 .userbutton{
     display: flex;
     width: 100;
