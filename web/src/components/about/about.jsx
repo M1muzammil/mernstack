@@ -28,7 +28,7 @@ const About = () => {
   useEffect(() => {
     renderCurrentUserPost(userId);
     getProfile(userId)
-    console.log("userid",userId);
+    console.log("userid", userId);
 
     return () => {
       // cleanup function
@@ -39,17 +39,19 @@ const About = () => {
   console.log(userId);
 
   const renderCurrentUserPost = (userId) => {
-    axios.get(`/api/v1/posts`)
+    console.log("userId:", userId);
+    axios.get(`/api/v1/posts/${userId}`)
       .then((response) => {
-        const userAllPosts = response.data;
+        const userAllPosts = response.data.results;
         setUserPosts(userAllPosts);
+        console.log("response.data", response.data);
       })
       .catch((error) => {
         console.error('Axios error:', error);
       });
   };
   
- 
+
   const getProfile = async (userId) => {
     try {
       const response = await axios.get(`/api/v1/profile/${userId}`);
@@ -59,7 +61,7 @@ const About = () => {
       setProfile("noUser");
     }
   };
-  
+
 
 
   const deletePostHandler = async (_id) => {
@@ -131,7 +133,7 @@ const About = () => {
         dispatch({
           type: 'USER_LOGOUT',
         });
-        window.location.pathname= './login'
+        window.location.pathname = './login'
       } else {
         console.error("Logout failed");
       }
@@ -157,7 +159,7 @@ const About = () => {
 
     <div>
       <div
-      
+
         className='profileName'>
         <p id="ppp"><BsPersonCircle /></p>
         <h5>{profile ? `${profile.firstName} ${profile.lastName}` : 'Loading...'}</h5>
@@ -176,7 +178,7 @@ const About = () => {
       </div>
 
       <div>
-        {userPosts.map((post, index) => (
+        {userPosts.map((post) => (
           <div key={post._id} className="post">
             {post.isEdit ? (
               <form onSubmit={editSaveSubmitHandler} className="postbanerr">
@@ -206,11 +208,11 @@ const About = () => {
                   <h2>{post.title}</h2>
                   <p>{post.text}</p>
                   {post.img &&
-                  <>
-                    <img width={300} src={post.img} alt="post image" />
-                    <br />
-                  </>
-                }
+                    <>
+                      <img width={300} src={post.img} alt="post image" />
+                      <br />
+                    </>
+                  }
                   <div className="userbutton">
                     <button
                       onClick={(e) => {
@@ -248,5 +250,3 @@ const About = () => {
 };
 
 export default About;
-
-

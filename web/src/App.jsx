@@ -11,6 +11,7 @@ import Signup from './components/signup/signup';
 import Lander from './lander/lander';
 import Edit from './components/edit/edit';
 import { GlobalContext } from './context/context';
+import Single from './components/sigleuserchat/single';
 
 const App = () => {
   const { userId } = useParams();
@@ -66,13 +67,14 @@ const App = () => {
           <Link to="/Chat">
             <BsChat />
           </Link>
+          
         </nav>
       ) : null}
       {state.isLogin === true ? (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/posts/:userId" element={<About />} />
-
+          <Route path="/single/:userId" element={<Single />} />
           <Route path="/Chat" element={<Chat />} />
           <Route path="/Edit" element={<Edit />} />
         </Routes>

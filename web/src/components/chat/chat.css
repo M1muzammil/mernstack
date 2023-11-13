@@ -1,0 +1,38 @@
+
+.chatscreen{
+    padding: 0.4em;
+      max-width: 100%;
+     border-right: 1px solid black;
+      
+  }
+  
+  .pnt{
+      display: flex;
+  gap: 1em;
+  }
+  
+  .pnt> span>img{
+      border-radius: 50%;
+  }
+  .pnt>.span1{
+      width: 100%;
+  }
+  .nt> h4,p{
+      margin: 0;
+      padding: 0;
+  }
+  .nt>p{ margin-top: -1em;
+
+  }
+  .nt{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+  }
+
+  .pnt{
+    border-top: 1px solid black;
+    padding-top: 0.4rem;
+  }
+
+
