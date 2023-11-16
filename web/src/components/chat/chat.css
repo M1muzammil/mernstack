@@ -7,6 +7,10 @@
      border-right: 1px solid black;
       
   }
+  #pro{
+    font-size: 4em;
+  
+  }
   
   .pnt{
       display: flex;

@@ -158,13 +158,18 @@ const About = () => {
   return (
 
     <div>
-      <div
+     <div className="all">
+     <div
 
-        className='profileName'>
-        <p id="ppp"><BsPersonCircle /></p>
-        <h5>{profile ? `${profile.firstName} ${profile.lastName}` : 'Loading...'}</h5>
-      </div>
-      <button className="logout" onClick={logout}>logout</button>
+className='profile'>
+<p id="ppp"><BsPersonCircle /></p>
+<h5>{profile ? `${profile.firstName} ${profile.lastName}` : 'Loading...'}</h5>
+<br />
+
+</div>
+<button className="logout" onClick={logout}>logout</button>
+     </div>
+     
       <h2>your Posts</h2>
 
 
@@ -209,7 +214,7 @@ const About = () => {
                   <p>{post.text}</p>
                   {post.img &&
                     <>
-                      <img width={300} src={post.img} alt="post image" />
+                      <img width={520} src={post.img} alt="post image" />
                       <br />
                     </>
                   }

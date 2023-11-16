@@ -1,18 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import SuggestionBox from "../../suggest/suggestion";
 import muzammil from "./muzammil.jpg";
 import "./home.css";
 import { BsHandThumbsUp,BsShare,BsChatLeftDots, BsPersonCircle ,BsPerson, BsGithub, BsFacebook, BsLinkedin, BsPersonFill }from 'react-icons/bs'
-
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  const navigate = useNavigate();
   const searchInputRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
   const [allPosts, setAllPosts] = useState([]);
   const [toggleRefresh, setToggleRefresh] = useState(false);
-  const [suggestions, setSuggestions] = useState([]);
+  
   // const [showSuggestions, setShowSuggestions] = useState(false);
   function formatTimeDifference(timestamp) {
     const currentTime = new Date();
@@ -130,7 +130,7 @@ const Home = () => {
               <p>{post.text}</p>
               {post.img &&
                   <>
-                    <img width={300} src={post.img} alt="post image" />
+                    <img width={520} src={post.img} alt="post image" />
                     <br />
                   </>
                 }
@@ -141,7 +141,9 @@ const Home = () => {
   doLikeHandler(post._id);
 }}
 ><BsHandThumbsUp/>{post?.likes?.length}</button>
-<button><BsChatLeftDots/></button>
+<button  onClick={() => {
+                        navigate(`/comment/${post._id}`);
+                      }}><BsChatLeftDots/></button>
 <button><BsShare/></button>
             </div>
             </div>

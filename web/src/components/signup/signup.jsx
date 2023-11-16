@@ -89,7 +89,7 @@ const Signup = () => {
 <p>Already have an account  <Link to='/Login' >
               Login
             </Link></p>
-    <label htmlFor="firstname"> firstname</label>
+    <label htmlFor="firstname"> Firstname</label>
     <br />
 <input ref={firstNameInputRef} type="text" 
   autoComplete="given-name"
@@ -97,7 +97,7 @@ const Signup = () => {
   id="firstNameInput"
   required/>
 <br />
-<label  htmlFor="lastname"> lasttname</label>
+<label  htmlFor="lastname"> Lasttname</label>
 <br />
 <input ref={lastNameInputRef}  autoComplete="family-name"
           name="lastNameInput"

@@ -12,7 +12,7 @@ import Lander from './lander/lander';
 import Edit from './components/edit/edit';
 import { GlobalContext } from './context/context';
 import Single from './components/sigleuserchat/single';
-
+import Comment from './components/comment/comment';
 const App = () => {
   const { userId } = useParams();
 
@@ -75,6 +75,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/posts/:userId" element={<About />} />
           <Route path="/single/:userId" element={<Single />} />
+          <Route path="/comment/:postId" element={<Comment />} />
           <Route path="/Chat" element={<Chat />} />
           <Route path="/Edit" element={<Edit />} />
         </Routes>

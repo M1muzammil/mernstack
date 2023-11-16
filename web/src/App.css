@@ -14,9 +14,7 @@
  color: white;
 font-weight: bolder;
  background-color: rgb(103, 156, 148);
-top: 0;
- position: fixed;
- z-index: 1;
+
 
 }
 .mainappnav>nav>a{
