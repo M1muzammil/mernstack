@@ -4,6 +4,13 @@ body{
 
 .div{
     background-color: rgb(199, 218, 220);
+   
+}
+.bich{
+    display: flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .searchdiv{
@@ -101,8 +108,9 @@ align-items: center;
 }
 .postbaner{
     box-shadow: 0 0 10px rgb(92, 135, 89);  box-shadow: 0 0 10px rgb(160, 210, 204); 
-   max-width: 350px;
-   margin: 2em;
+   max-width: 550px;
+  
+  border-bottom: 1px solid black;
   background-color: #93b5b5;
     padding-left: 1em;
     padding-top: 1em;

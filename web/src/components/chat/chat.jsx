@@ -24,7 +24,7 @@ const Chat = () => {
   }, []);
 
   return (
-    <div>
+    <div className='full'>
       <div className="chatscreen">
         <div className="userinfo">
           {users.map(user => (

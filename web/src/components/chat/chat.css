@@ -1,4 +1,6 @@
-
+.full{
+    height: 100vh;
+}
 .chatscreen{
     padding: 0.4em;
       max-width: 100%;

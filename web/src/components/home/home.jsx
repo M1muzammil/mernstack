@@ -115,7 +115,7 @@ const Home = () => {
       <div>
         <h1>All Blogs</h1>
       </div>
-      <div>
+      <div className="bich">
         {allPosts.map((post) => (
           <div key={post._id} className="post">
             <div className="postbaner">
