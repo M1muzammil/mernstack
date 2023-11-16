@@ -23,7 +23,7 @@ const About = () => {
 
 
   const [toggleRefresh, setToggleRefresh] = useState(false);
-
+ 
 
   useEffect(() => {
     renderCurrentUserPost(userId);
@@ -133,6 +133,7 @@ const About = () => {
         dispatch({
           type: 'USER_LOGOUT',
         });
+        setToggleRefresh(toggleRefresh);
         window.location.pathname = './login'
       } else {
         console.error("Logout failed");
