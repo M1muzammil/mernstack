@@ -920,7 +920,7 @@ router.post('/post/:postId/dolike', async (req, res, next) => {
 
 
 
-// POST    /api/v1/post
+// // POST    /api/v1/post
 router.post('/post',
     (req, res, next) => {
         req.decoded = { ...req.body.decoded }
@@ -1020,8 +1020,76 @@ router.post('/post',
 
     })
 
+// router.post(
+//     '/post',
+//     (req, res, next) => {
+//                 req.decoded = { ...req.body.decoded }
+//                 next();
+//             },
+//             upload.any(),
 
-
+//     multer().single('file'), // Change to single file upload
+//     async (req, res, next) => {
+//       console.log('req.body: ', req.body);
+  
+//       if (!req.body.title || !req.body.text) {
+//         res.status(403);
+//         res.send(`required parameters missing, 
+//           example request body:
+//           {
+//               title: "abc post title",
+//               text: "some post text"
+//           } `);
+//         return;
+//       }
+  
+//       try {
+//         // Check if file was uploaded
+//         if (!req.file) {
+//           res.status(400).send({ message: 'No file uploaded.' });
+//           return;
+//         }
+  
+//         const [file] = await bucket.upload(req.file.path, {
+//           destination: `profile/${req.file.filename}`,
+//         });
+  
+//         const [urlData] = await file.getSignedUrl({
+//           action: 'read',
+//           expires: '03-09-2491',
+//         });
+  
+//         const publicDownloadableUrl = urlData[0];
+  
+//         const insertResponse = await col.insertOne({
+//           title: req.body.title,
+//           text: req.body.text,
+//           img: publicDownloadableUrl,
+//           authorEmail: req.decoded.email,
+//           authorId: new ObjectId(req.decoded._id),
+//           time: new Date(),
+//           firstName: req.body.firstName,
+//           lastName: req.body.lastName,
+//         });
+  
+//         console.log('insertResponse: ', insertResponse);
+  
+//         res.send({ message: 'post created' });
+  
+//         // Delete the file from the local filesystem
+//         try {
+//           fs.unlinkSync(req.file.path);
+//         } catch (err) {
+//           console.error(err);
+//         }
+//       } catch (error) {
+//         console.error('Error processing file upload:', error);
+//         res.status(500).send({ message: 'server error, please try later' });
+//       }
+//     }
+//   );
+  
+  
 
 
 export default router
