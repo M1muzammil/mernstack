@@ -10,18 +10,11 @@ const About = () => {
   const { userId } = useParams();
 
   const { state, dispatch } = useContext(GlobalContext);
-
   const [userPosts, setUserPosts] = useState([]);
   const [profile, setProfile] = useState([]);
-
   const [allPosts, setAllPosts] = useState(userPosts);
-
-
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(null);
-
-
-
   const [toggleRefresh, setToggleRefresh] = useState(false);
  
 
@@ -34,7 +27,7 @@ const About = () => {
       // cleanup function
     };
 
-  }, [userId]);;
+  }, [userId] , [toggleRefresh]);;
 
   console.log(userId);
 
@@ -91,38 +84,44 @@ const About = () => {
 
 
 
-
-
-
-
   const editSaveSubmitHandler = async (e) => {
     e.preventDefault();
     const _id = e.target.elements[0].value;
     const title = e.target.elements[1].value;
     const text = e.target.elements[2].value;
-
+  
     try {
       setIsLoading(true);
       const response = await axios.put(`/api/v1/post/${_id}`, {
         title: title,
         text: text,
       });
-
+  
       setIsLoading(false);
       console.log(response.data);
       setAlert(response?.data?.message);
       setToggleRefresh(!toggleRefresh);
-
+  
       // Find and update the post in your local state (allPosts)
       const updatedPosts = allPosts.map((post) =>
         post._id === _id ? { ...post, title, text, isEdit: false } : post
       );
       setAllPosts(updatedPosts);
+  
+      // Also update the userPosts state if needed
+      const updatedUserPosts = userPosts.map((post) =>
+        post._id === _id ? { ...post, title, text, isEdit: false } : post
+      );
+      setUserPosts(updatedUserPosts);
     } catch (error) {
       console.log(error?.data);
       setIsLoading(false);
     }
   };
+  
+  
+
+
 
   const logout = async (event) => {
     event.preventDefault();
@@ -133,7 +132,7 @@ const About = () => {
         dispatch({
           type: 'USER_LOGOUT',
         });
-        setToggleRefresh(toggleRefresh);
+        setToggleRefresh(!toggleRefresh);
         window.location.pathname = './login'
       } else {
         console.error("Logout failed");

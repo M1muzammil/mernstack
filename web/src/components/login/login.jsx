@@ -85,7 +85,9 @@ const Login = () => {
         />
 
 <br />
-<p>don't have any account<Link to="/Signup">Signup</Link></p>
+<p id="margin">Don't have any account<Link to="/Signup">Signup</Link></p>
+OR
+<p> Did'nt remember passowrd ?  <Link to={`/forgetpassword1`}>Forget Password</Link></p>
 <button>submit</button>
 
 </form>
@@ -106,7 +108,7 @@ const Login = () => {
         
     </div>
 
-
+   
 
 
 

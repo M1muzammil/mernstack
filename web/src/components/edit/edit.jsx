@@ -64,10 +64,7 @@ const Edit = () => {
       try {
         setIsLoading(true);
   
-        // const response = await axios.post(`${baseUrl}/api/v1/post`, {
-        //   title: postTitleInputRef.current.value,
-        //   text: postBodyInputRef.current.value,
-        // });
+       
   
         let formData = new FormData();
   

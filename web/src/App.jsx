@@ -13,6 +13,8 @@ import Edit from './components/edit/edit';
 import { GlobalContext } from './context/context';
 import Single from './components/sigleuserchat/single';
 import Comment from './components/comment/comment';
+import ForgetPassword from './components/forgetpassword1/forgetpassword1'
+import Password from './components/password/password'
 const App = () => {
   const { userId } = useParams();
 
@@ -91,6 +93,8 @@ const App = () => {
           {/* <div>{JSON.stringify(state)}</div> */}
           <Routes>
             <Route path="/" element={<Lander />} />
+            <Route path="/forgetpassword1"element={<ForgetPassword/>} />
+            <Route path="/password"element={<Password/>} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="*" element={<Navigate to="/" replace={true} />} />
