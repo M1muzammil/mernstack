@@ -14,6 +14,7 @@ async function run() {
         await client.close()
         process.exit(1)
     }
+    
 }
 
 run().catch(console.dir)

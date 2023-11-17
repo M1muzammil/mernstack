@@ -19,7 +19,7 @@ const col = db.collection("products");
 import chatrouter from './routes/chat.mjs'
 import authRouter from './routes/auth.mjs'
 import postRouter from './routes/product.mjs'
-
+import commentRouter from './routes/comment.mjs'
 
 
 const app = express();
@@ -71,6 +71,7 @@ app.use("/api/v1", (req, res, next) => { // JWT
 
 app.use("/api/v1", postRouter) // Secure api
 app.use("/api/v1/", chatrouter)
+app.use("/ap1/v1",commentRouter)
 app.use("/api/v1/ping", (req, res) => {
     res.send("OK");
 })

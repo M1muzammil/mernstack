@@ -1,11 +1,8 @@
 import express from 'express';
 import { ObjectId } from 'mongodb'
-import admin from "firebase-admin";
-import multer, { diskStorage } from 'multer';
-import fs from "fs";
 import { client } from '../mongodb.mjs';
 import 'dotenv/config';
-import { OpenAI } from "openai";
+
 
 const db = client.db("mongocrud");
 const userCollection = db.collection("users");
@@ -24,7 +21,7 @@ router.post('/comment',
       req.decoded = { ...req.body.decoded };
       next();
     },
-    upload.any(),
+
     async (req, res, next) => {
       try {
         const insertResponse = await comments.insertOne({
@@ -59,31 +56,6 @@ router.post('/comment',
     }
   });
 
-  router.put("/comment/:commentId", async (req, res, next) => {
-    const commentId = new ObjectId(req.params.commentId);
-  
-    const { comment } = req.body;
-  
-    if (!comment) {
-      res
-        .status(403)
-        .send('Required parameters missing.');
-      return;
-    }
-  
-    try {
-      const updateResponse = await commentsCollection.updateOne(
-        { _id: commentId },
-        { $set: { comment } }
-      );
-  
-      if (updateResponse.matchedCount === 1) {
-        res.send(`Comment with id ${commentId} updated successfully.`);
-      } else {
-        res.send("Comment not found with the given id.");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  });
-  
+ 
+
+  export default router
