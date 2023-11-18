@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.9a330659.css",
-    "main.js": "/static/js/main.8011a5f9.js",
+    "main.js": "/static/js/main.8ada90cc.js",
     "static/js/787.d1d4a2c2.chunk.js": "/static/js/787.d1d4a2c2.chunk.js",
     "static/media/muzammilali.jpg": "/static/media/muzammilali.0f3aad68f595856bf9c8.jpg",
     "static/media/muzammil.jpg": "/static/media/muzammil.3715068cd8f27cbb2208.jpg",
@@ -9,11 +9,11 @@
     "static/media/mmm.jpeg": "/static/media/mmm.8eb679e29af9fc39bd10.jpeg",
     "index.html": "/index.html",
     "main.9a330659.css.map": "/static/css/main.9a330659.css.map",
-    "main.8011a5f9.js.map": "/static/js/main.8011a5f9.js.map",
+    "main.8ada90cc.js.map": "/static/js/main.8ada90cc.js.map",
     "787.d1d4a2c2.chunk.js.map": "/static/js/787.d1d4a2c2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9a330659.css",
-    "static/js/main.8011a5f9.js"
+    "static/js/main.8ada90cc.js"
   ]
 }

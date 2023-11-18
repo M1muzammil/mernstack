@@ -1,15 +1,30 @@
+
+
+// Lastattepmt.jsx
 import "./password.css"
-import { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import axios from "axios";
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { GlobalContext } from "../../context/context";
-
-
+import Swal from "sweetalert2";
 
 const Lastattepmt = () => {
+  const location = useLocation();
+  const otp = location.state.otp;
+  console.log("otp", otp);
   const navigate = useNavigate();
 
-  const location = useLocation();
+  useEffect(() => {
+    Swal.fire({
+      icon: "info",
+      text: "Your OTP code dont share it",
+      title: otp,
+      showConfirmButton: true,
+      confirmButtonColor: "#284352",
+      confirmButtonText: "Ok",
+    });
+  }, [otp]);
+
   console.log("email: ", location.state.email);
   let { state, dispatch } = useContext(GlobalContext);
   const emailInputRef = useRef(null);
@@ -17,7 +32,6 @@ const Lastattepmt = () => {
   const passwordInputRef = useRef(null);
   const [alertMessage, setAlertMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
 
   useEffect(() => {
     setTimeout(() => {
@@ -46,17 +60,24 @@ const Lastattepmt = () => {
     } catch (e) {
       console.log(e);
       setErrorMessage(e.response?.data?.message);
+      console.log("loginotp ", e )
     }
   };
 
   return (
     <div className="password2">
-    
-
       <form id="password2" onSubmit={LoginSubmitHandler}>
         <label htmlFor="emailInput">Email:</label>
-        <input value={location.state.email} ref={emailInputRef} disabled type="email" autoComplete="email" name="emailInput" id="emailInput" required />
-
+        <input
+          value={location.state.email}
+          ref={emailInputRef}
+          disabled
+          type="email"
+          autoComplete="email"
+          name="emailInput"
+          id="emailInput"
+          required
+        />
         <br />
         <label htmlFor="otpInput">OTP:</label>
         <input
@@ -65,6 +86,7 @@ const Lastattepmt = () => {
           autoComplete="one-time-code"
           name="otpInput"
           id="otpInput"
+          value={location.state.otp}
         />
         <br />
         <label htmlFor="passwordInput">Password:</label>
@@ -75,11 +97,10 @@ const Lastattepmt = () => {
           name="passwordInput"
           id="passwordInput"
         />
-
         <br />
-
-        <button id="updatepassword" type="submit">Update password</button>
-
+        <button id="updatepassword" type="submit">
+          Update password
+        </button>
         <div className="alertMessage">{alertMessage}</div>
         <div className="errorMessage">{errorMessage}</div>
       </form>
