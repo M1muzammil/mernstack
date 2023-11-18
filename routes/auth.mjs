@@ -166,6 +166,142 @@ router.post("/logout", async (req, res, next) => {
 
 
 
+// router.post('/forget-password', async (req, res, next) => {
+
+//     if (!req.body?.email) {
+//         res.status(403);
+//         res.send(`required parameters missing,
+//                     example request body:
+//                 {
+//                     email: "some@email.com"
+//                 } `);
+//         return;
+//     }
+
+//     req.body.email = req.body.email.toLowerCase();
+
+//     try {
+//         const user = await userCollection.findOne({ email: req.body.email });
+       
+
+//         if (!user) { // user not found
+//             res.status(403).send({
+//                 message: "user not found"
+//             });
+//             return;
+//         }
+
+//         const otpCode = otpGenerator.generate(6, {
+//             upperCaseAlphabets: false,
+//             lowerCaseAlphabets: false,
+//             specialChars: false
+//         });
+
+//         console.log("otpCode: ", otpCode);
+
+//         res.send({ message: 'Forget password otp send', otp: otpCode })
+
+//         // const mailOptions = {
+//         //     from: 'alimuzammilali76@gmail.com', // Replace with your email
+//         //     to: req.body.email,
+//         //     subject: 'Forget Password - OTP Code',
+//         //     text: `Hi ${user.firstName}! Here is your forget password OTP code, this is valid for 15 minutes: ${otpCode}`,
+//         //   };
+      
+//         //   transporter.sendMail(mailOptions, (error, info) => {
+//         //     if (error) {
+//         //       console.log('Error sending email:', error);
+//         //       res.status(500).send('Error sending email, please try later');
+//         //     } else {
+//         //       console.log('Email sent: ' + info.response);
+//         //       res.send({ message: 'Forget password OTP sent' });
+//         //     }
+//         //   });
+
+
+//         const otpCodeHash = await stringToHash(otpCode);
+
+//         const insertResponse = await otpCollection.insertOne({
+//             email: req.body.email,
+//             otpCodeHash: otpCodeHash,
+//             createdOn: new Date()
+//         });
+//         console.log("insertResponse: ", insertResponse);
+
+//         res.send({ message: 'Forget password otp send' });
+
+//     } catch (e) {
+//         console.log("error getting data mongodb: ", e);
+//         res.status(500).send('server error, please try later');
+//     }
+// })
+
+// router.post('/forget-password-complete', async (req, res, next) => {
+
+//     if (!req.body?.email
+//         || !req.body.otpCode
+//         || !req.body.newPassword) {
+
+//         res.status(403);
+//         res.send(`required parameters missing, 
+//         example request body:
+//         {
+//             email: "some@email.com",
+//             otpCode: "344532",
+//         } `);
+//         return;
+//     }
+
+//     req.body.email = req.body.email.toLowerCase();
+
+//     try {
+//         const otpRecord = await otpCollection.findOne(
+//             { email: req.body.email },
+//             { sort: { _id: -1 } }
+//         )
+//         console.log("otpRecord: ", otpRecord);
+
+//         if (!otpRecord) { // user not found
+//             res.status(403).send({
+//                 message: "invalid otp"
+//             });
+//             return;
+//         }
+
+//         const isOtpValid = await varifyHash(req.body.otpCode, otpRecord.otpCodeHash);
+
+//         if (!isOtpValid) {
+//             res.status(403).send({
+//                 message: "invalid otp"
+//             });
+//             return;
+//         }
+
+//         if (moment().diff(moment(otpRecord.createdOn), 'minutes') >= 15) {
+//             res.status(403).send({
+//                 message: "invalid otp"
+//             });
+//             return;
+//         }
+
+//         const passwordHash = await stringToHash(req.body.newPassword);
+
+//         const updateResp = await userCollection.updateOne(
+//             { email: otpRecord.email },
+//             {
+//                 $set: { password: passwordHash }
+//             });
+//         console.log("updateResp: ", updateResp);
+
+
+//         res.send({ message: 'Forget password completed, proceed to login with new password' });
+
+//     } catch (e) {
+//         console.log("error getting data mongodb: ", e);
+//         res.status(500).send('server error, please try later');
+//     }
+// })
+
 router.post('/forget-password', async (req, res, next) => {
 
     if (!req.body?.email) {
@@ -182,7 +318,6 @@ router.post('/forget-password', async (req, res, next) => {
 
     try {
         const user = await userCollection.findOne({ email: req.body.email });
-       
 
         if (!user) { // user not found
             res.status(403).send({
@@ -199,24 +334,6 @@ router.post('/forget-password', async (req, res, next) => {
 
         console.log("otpCode: ", otpCode);
 
-        const mailOptions = {
-            from: 'alimuzammilali76@gmail.com', // Replace with your email
-            to: req.body.email,
-            subject: 'Forget Password - OTP Code',
-            text: `Hi ${user.firstName}! Here is your forget password OTP code, this is valid for 15 minutes: ${otpCode}`,
-          };
-      
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-              console.log('Error sending email:', error);
-              res.status(500).send('Error sending email, please try later');
-            } else {
-              console.log('Email sent: ' + info.response);
-              res.send({ message: 'Forget password OTP sent' });
-            }
-          });
-
-
         const otpCodeHash = await stringToHash(otpCode);
 
         const insertResponse = await otpCollection.insertOne({
@@ -226,26 +343,24 @@ router.post('/forget-password', async (req, res, next) => {
         });
         console.log("insertResponse: ", insertResponse);
 
-        res.send({ message: 'Forget password otp send' });
+        res.send({ message: 'Forget password otp send', otp: otpCode });
 
     } catch (e) {
         console.log("error getting data mongodb: ", e);
         res.status(500).send('server error, please try later');
     }
-})
+});
 
 router.post('/forget-password-complete', async (req, res, next) => {
 
-    if (!req.body?.email
-        || !req.body.otpCode
-        || !req.body.newPassword) {
-
+    if (!req.body?.email || !req.body.otpCode || !req.body.newPassword) {
         res.status(403);
         res.send(`required parameters missing, 
         example request body:
         {
             email: "some@email.com",
             otpCode: "344532",
+            newPassword: "new-password",
         } `);
         return;
     }
@@ -256,7 +371,7 @@ router.post('/forget-password-complete', async (req, res, next) => {
         const otpRecord = await otpCollection.findOne(
             { email: req.body.email },
             { sort: { _id: -1 } }
-        )
+        );
         console.log("otpRecord: ", otpRecord);
 
         if (!otpRecord) { // user not found
@@ -291,6 +406,8 @@ router.post('/forget-password-complete', async (req, res, next) => {
             });
         console.log("updateResp: ", updateResp);
 
+        // You may want to remove the used OTP record from the collection
+        await otpCollection.deleteOne({ _id: new ObjectId(otpRecord._id) });
 
         res.send({ message: 'Forget password completed, proceed to login with new password' });
 
@@ -298,7 +415,7 @@ router.post('/forget-password-complete', async (req, res, next) => {
         console.log("error getting data mongodb: ", e);
         res.status(500).send('server error, please try later');
     }
-})
+});
 
 
 
